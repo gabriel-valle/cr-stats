@@ -1,7 +1,11 @@
 const request = require('request');
-const options = require('./options.js');
+const options = require('./src/options.js');
+const EventEmitter = require('events');
+const APIRequester = require('./src/API-requester.js');
 
-request(options('player/88VUPUVJV'), (error, body, response) => {
-  if (error) throw new Error(error);
-  console.log(body);
+api_req = new APIRequester();
+api_req.on('response', (ev) => {
+    console.log(ev);
 });
+
+api_req.requestPlayer('88VUPUVJV');
